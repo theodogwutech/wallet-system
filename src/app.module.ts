@@ -18,23 +18,12 @@ dotenv.config();
 
 const routes = [
   {
-    path: '/wallet',
+    path: '/wallet*',
     method: RequestMethod.ALL,
   },
+
   {
-    path: '/wallet/fund-me',
-    method: RequestMethod.ALL,
-  },
-  {
-    path: '/wallet/:id',
-    method: RequestMethod.ALL,
-  },
-  {
-    path: '/wallet/:id/transactions',
-    method: RequestMethod.ALL,
-  },
-  {
-    path: '/wallet/:id/transactions/:transactionId',
+    path: '/transactions*',
     method: RequestMethod.ALL,
   },
 ];

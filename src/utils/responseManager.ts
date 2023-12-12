@@ -6,12 +6,14 @@ export class ResponseManager {
     statusCode: number,
     message: string,
     data?: T,
+    extra?: any,
   ): StandardResponse<T> {
     return {
       success,
       statusCode,
       message,
       data,
+      extra,
     };
   }
 }
@@ -27,5 +29,8 @@ export class StandardResponse<T = any> {
   message: string;
 
   @ApiProperty()
-  data: T;
+  data?: T;
+
+  @ApiProperty()
+  extra?: any;
 }

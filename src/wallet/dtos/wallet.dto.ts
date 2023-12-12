@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import Users from 'src/users/model/Users';
+import Users from '../../users/model/Users';
 import Wallet from '../model/Wallet';
 
 export class CreateWalletDto {

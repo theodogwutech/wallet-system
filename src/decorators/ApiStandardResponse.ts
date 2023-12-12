@@ -1,5 +1,5 @@
 import { Type, applyDecorators } from '@nestjs/common';
-import { StandardResponse } from 'src/utils/responseManager';
+import { StandardResponse } from '../utils/responseManager';
 import { ApiResponseOptions, getSchemaPath } from '@nestjs/swagger';
 
 export const ApiStandardArrayResponse = <

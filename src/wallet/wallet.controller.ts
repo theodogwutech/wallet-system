@@ -7,20 +7,23 @@ import {
   HttpStatus,
   Post,
   Req,
-  Res,
   ValidationPipe,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { ApiTags, ApiExtraModels, ApiCreatedResponse } from '@nestjs/swagger';
-import { ApiStandardResponse } from 'src/decorators/ApiStandardResponse';
+import {
+  ApiTags,
+  ApiExtraModels,
+  ApiCreatedResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { ApiStandardResponse } from '../decorators/ApiStandardResponse';
 import { WalletService } from './wallet.service';
 import Wallet from './model/Wallet';
 import { FundMyAccountDto, TransferAccountDto } from './dtos/wallet.dto';
-import { generateHash, generateRef } from 'src/utils';
-import { UsersService } from 'src/users/users.service';
-import { TransactionType } from 'src/transactions/model/Transactions';
-import { ResponseManager } from 'src/utils/responseManager';
+import { generateHash, generateRef } from '../utils';
+import { ResponseManager } from '../utils/responseManager';
 
+@ApiBearerAuth()
 @ApiTags('Wallet')
 @Controller('wallet')
 @ApiExtraModels()

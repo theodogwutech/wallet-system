@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import Users from 'src/users/model/Users';
+import Users from '../users/model/Users';
 
 export class AuthenticationProvider {
   static async hashPassword(password: string): Promise<string> {

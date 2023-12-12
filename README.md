@@ -1,38 +1,37 @@
-# wallet-system
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+# SECTION 2
 
-🚀 A robust and scalable web application built with NestJS, Node.js, PostgreSQL, TypeORM, and TypeScript features Swagger API documentation.
+## Explain the problem of “racing condition” and how it affects the integrity of a database.
 
-## Overview
+In a database, multiple operations (like reading, updating, or deleting data) can happen at the same time from different parts of an application. If not managed carefully, these operations might conflict and lead to unexpected or incorrect results. This unpredictability in the order of operations is the racing condition.
 
-This project is a modern web application developed using the NestJS framework, a powerful and extensible Node.js framework for building efficient and scalable server-side applications. The application utilizes PostgreSQL as its database, with TypeORM providing a seamless object-relational mapping for TypeScript.
 
-## Features
+## Give a practical fintech example where “racing” can leads to loss of money.
 
-- **NestJS**: Leverage the power of NestJS for building scalable and maintainable server-side applications.
-- **Node.js**: Utilize the asynchronous and event-driven runtime for building efficient backend services.
-- **PostgreSQL**: Store and retrieve data using the robust and reliable PostgreSQL database.
-- **TypeORM**: Seamlessly map TypeScript classes to database tables, making data handling more intuitive.
-- **TypeScript**: Enjoy the benefits of a statically typed superset of JavaScript for enhanced code maintainability and developer productivity.
-- **Swagger Documentation**: Explore and understand the API easily with Swagger documentation, providing a user-friendly interface for developers.
+Consider a situation where two users, Ngozi and Chijioke, simultaneously initiate transactions to pay a vendor ₦500 each for a limited-stock item. Due to a race condition, both transactions might pass the available balance check simultaneously, deducting ₦500 from each user's account. This can result in both Ngozi and Chijioke believing their payments were successful, leading to a financial loss for one user when the system later identifies the conflicting transactions during reconciliation. To prevent such issues, payment platforms must implement robust concurrency controls and transaction handling to ensure accurate and fair processing of user payments.
 
-## Getting Started
 
-Follow these steps to get the project up and running on your local machine:
+## Profer one practical solution to fix it .
 
-1. **Clone the Repository**: `git clone https://github.com/valfenix/wallet-system.git`
-2. **Install Dependencies**: `npm install`
-3. **Configure Database**: Update the database configuration in `src/config/database.ts`.
-4. **Run Migrations**: `npm run migrate`
-5. **Start the Server**: `npm start`
-6. **Explore API Documentation**: Visit `http://localhost:3000/api` for Swagger documentation.
+There are several steps that can be taken to prevent Race condition
 
-## Contributing
+ - **Database Transactions**: Wrapping the balance check and deduction operations within a single database transaction. This ensures that either both operations succeed or fail together, maintaining atomicity.
+ - **Retrying**: If a transaction fails due to a conflict, the system can notify the user and prompt them to retry the transaction.
+ - **Rolling Back**: If a conflict is detected during the transaction (e.g., two users trying to purchase the same limited-stock item simultaneously), the system should roll back the transaction to its initial state, ensuring that no changes are persisted.
 
-I welcome contributions! Feel free to open issues, submit pull requests, or provide suggestions. Check out our [contribution guidelines](CONTRIBUTING.md) for more details.
 
-## License
+# Section 3: Algorithm Assessment
 
-This project is licensed under the [MIT License](LICENSE).
+## Given a square matrix, calculate the absolute difference between the sums of its diagonals.
 
+```javascript
+function diagonalDifference(matrix) {
+    let d = 0, r = 0;
+    matrix.forEach((row, i) => d += row[i], r += row[matrix.length - i - 1]);
+    return Math.abs(d - r);
+}
+
+const n = parseInt(readline());
+const matrix = Array.from({ length: n }, () => readline().split(' ').map(Number));
+
+console.log(diagonalDifference(matrix));

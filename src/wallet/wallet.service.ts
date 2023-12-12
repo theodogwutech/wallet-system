@@ -1,14 +1,12 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import Wallet from './model/Wallet';
 import { Connection, FindOptionsWhere, QueryRunner, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateWalletDto, FundMyAccountDto } from './dtos/wallet.dto';
-import { TransactionsService } from 'src/transactions/transactions.service';
+import { TransactionsService } from '../transactions/transactions.service';
 import e, { Request } from 'express';
-import { generateHash, generateRef } from 'src/utils';
-import { TransactionType } from 'src/transactions/model/Transactions';
-import { UsersService } from 'src/users/users.service';
-import Users from 'src/users/model/Users';
+import { TransactionType } from '../transactions/model/Transactions';
+import Users from '../users/model/Users';
 
 @Injectable()
 export class WalletService {

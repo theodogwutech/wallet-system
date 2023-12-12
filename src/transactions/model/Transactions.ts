@@ -1,4 +1,4 @@
-import Users from 'src/users/model/Users';
+import Users from '../../users/model/Users';
 import {
   Column,
   CreateDateColumn,

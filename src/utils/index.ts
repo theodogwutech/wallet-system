@@ -9,6 +9,11 @@ export const generateRef = (length: number) => {
   return result;
 };
 
+export function sanitizeDateString(date: string) {
+  const dateString = date.replace(/"/g, '');
+  return dateString;
+}
+
 export const generateHash = () => {
   const key = `FINTAVA_TX_REF${generateRef(12)}`.toUpperCase();
   return key;

@@ -6,14 +6,20 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { ApiTags, ApiExtraModels, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiExtraModels,
+  ApiCreatedResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto, LoginUserDto } from './dtos/user.dto';
-import { ApiStandardResponse } from 'src/decorators/ApiStandardResponse';
-import { ResponseManager, StandardResponse } from 'src/utils/responseManager';
+import { ApiStandardResponse } from '../decorators/ApiStandardResponse';
+import { ResponseManager, StandardResponse } from '../utils/responseManager';
 import Users from './model/Users';
-import { AuthenticationProvider } from 'src/providers/AuthenticationProvider';
+import { AuthenticationProvider } from '../providers/AuthenticationProvider';
 
+@ApiBearerAuth()
 @ApiTags('Users')
 @Controller('users')
 @ApiExtraModels()
@@ -33,13 +39,12 @@ export class UsersController {
     )
     createUserDto: CreateUserDto,
   ): Promise<StandardResponse<Users>> {
-    const user = await this.usersService.Registration(createUserDto);
+    await this.usersService.Registration(createUserDto);
 
     return ResponseManager.StandardResponse(
       true,
       HttpStatus.CREATED,
       'Registration Successful. Please check your email for verification.',
-      user,
     );
   }
 
@@ -64,7 +69,7 @@ export class UsersController {
       true,
       HttpStatus.OK,
       `Welcome back ${user.firstName}`,
-      { user, accessToken },
+      { ...user, accessToken },
     );
   }
 }
